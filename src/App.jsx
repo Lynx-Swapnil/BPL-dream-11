@@ -4,7 +4,7 @@ import Banner from './components/Homepage/Banner/Banner'
 import Footer from './components/Homepage/Footer/Footer'
 import Players from './components/Homepage/Players/Players';
 import Navbar from './components/Navbar/Navbar'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const fetchPlayer = async () => {
   const res = await fetch('/data.json');
@@ -15,17 +15,23 @@ function App() {
 
   const playersPromise = useMemo(() => fetchPlayer(), []);
   const [coin, setCoin] = useState(5000);
+  const creditAmount = 1000;
+
+  const handleAddCoin = () => {
+    setCoin((prevCoin) => prevCoin + creditAmount);
+    toast.success(`Added ${creditAmount} coins to your balance`);
+  };
 
   return (
     <>
-      <Navbar coin={coin} />
+      <Navbar coin={coin} onAddCoin={handleAddCoin} />
       <main className="mx-auto w-[92%] max-w-315">
         <Banner />
         <Suspense fallback={<span className="loading loading-dots loading-xl"></span>}>
           <Players playersPromise={playersPromise} setCoin={setCoin} coin={coin} />
         </Suspense>
       </main>
-      <ToastContainer />
+      <ToastContainer position='bottom-right' />
       <Footer />
     </>
   )

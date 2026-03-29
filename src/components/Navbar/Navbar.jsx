@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import dollarImg from '../../../assets/dollar.png';
 import logoImg from '../../../assets/logo.png';
 
-const Navbar = ({ coin }) => {
+const Navbar = ({ coin, onAddCoin }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className='sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm'>
+    <header className='w-full'>
       <div className='mx-auto w-[92%] max-w-315 py-6 md:py-8'>
         <div className='flex items-center justify-between'>
           <a href='/' className='block'>
@@ -36,10 +36,21 @@ const Navbar = ({ coin }) => {
               </div>
             </button>
 
-            <button className='h-12 rounded-xl border border-[#E7E7E7] px-4 md:px-5 bg-white flex items-center gap-2 font-semibold text-[#202020]'>
-              {coin} Coin
-              <img src={dollarImg} alt='Coin' className='w-4 h-4' />
-            </button>
+            <div className='flex items-center gap-2'>
+              <button className='h-12 rounded-xl border border-[#E7E7E7] px-4 md:px-5 bg-white flex items-center gap-2 font-semibold text-[#202020]'>
+                {coin} Coin
+                <img src={dollarImg} alt='Coin' className='w-4 h-4' />
+              </button>
+              <button
+                type='button'
+                className='h-12 w-12 rounded-xl border border-[#E7E7E7] bg-[#E7FE29] text-xl font-bold text-[#202020]'
+                onClick={onAddCoin}
+                aria-label='Add coins'
+                title='Add coins'
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
 
