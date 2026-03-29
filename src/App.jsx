@@ -27,7 +27,13 @@ function App() {
       <Navbar coin={coin} onAddCoin={handleAddCoin} />
       <main className="mx-auto w-[92%] max-w-315">
         <Banner />
-        <Suspense fallback={<span className="loading loading-dots loading-xl"></span>}>
+        <Suspense
+          fallback={(
+            <div className="flex min-h-[40vh] items-center justify-center">
+              <span className="loading loading-dots loading-xl"></span>
+            </div>
+          )}
+        >
           <Players playersPromise={playersPromise} setCoin={setCoin} coin={coin} />
         </Suspense>
       </main>
