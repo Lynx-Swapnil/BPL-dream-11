@@ -5,11 +5,11 @@ import SelectedPlayers from './SelectedPlayers/SelectedPlayers';
 const Players = ({ playersPromise, setCoin, coin }) => {
 
     const players = use(playersPromise);
-    
+
 
     const [selectedType, setSelectedType] = useState('available');
     const [selectedPlayers, setSelectedPlayers] = useState([]);
-    
+
     return (
         <div className='container mx-auto my-15'>
             <div className='flex justify-between items-center gap-4 mb-5'>
@@ -23,7 +23,7 @@ const Players = ({ playersPromise, setCoin, coin }) => {
                     </button>
                 </div>
             </div>
-           { selectedType === 'available' ? <AvailablePlayers players={players} setCoin={setCoin} coin={coin} setSelectedPlayers={setSelectedPlayers} selectedPlayers={selectedPlayers}/> : <SelectedPlayers selectedPlayers={selectedPlayers} setSelectedPlayers={setSelectedPlayers} coin={coin} setCoin={setCoin} /> }
+            {selectedType === 'available' ? <AvailablePlayers players={players} setCoin={setCoin} coin={coin} setSelectedPlayers={setSelectedPlayers} selectedPlayers={selectedPlayers} /> : <SelectedPlayers selectedPlayers={selectedPlayers} setSelectedPlayers={setSelectedPlayers} coin={coin} setCoin={setCoin} />}
         </div>
     );
 };

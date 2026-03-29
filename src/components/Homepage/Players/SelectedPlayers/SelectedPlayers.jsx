@@ -1,7 +1,7 @@
-import { FaUser } from "react-icons/fa";
-import { GoTrash } from "react-icons/go";
 
-const SelectedPlayers = ({ selectedPlayers , setSelectedPlayers , coin , setCoin}) => {
+import SelectedCard from "../../../ui/SelectedCard";
+
+const SelectedPlayers = ({ selectedPlayers, setSelectedPlayers, coin, setCoin }) => {
 
     const handleRemoveSelectedPlayer = (playerToRemove) => {
         const filteredPlayers = selectedPlayers.filter(selectedPlayer => selectedPlayer.playerName !== playerToRemove.playerName);
@@ -13,18 +13,14 @@ const SelectedPlayers = ({ selectedPlayers , setSelectedPlayers , coin , setCoin
         <div>
             <div className="space-y-5">
                 {
-                    selectedPlayers.map(player => (
-                        <div key={player.playerName} className="flex items-center justify-between gap-6 p-10 rounded-2xl border" >
-                            <div className="flex items-center gap-6">
-                                <img src={player.playerImg} alt={player.playerName} className="h-24 w-24 object-cover rounded-lg" />
-                                <div>
-                                    <h2 className="flex items-center gap-2 font-semibold text-xl"><FaUser />{player.playerName}</h2>
-                                    <p>{player.playerType}</p>
-                                </div>
-                            </div>
-                            <button className="btn text-red-500 border-none " onClick={() => { handleRemoveSelectedPlayer(player) }}><GoTrash /></button>
+                    selectedPlayers.length === 0 ?
+                        <div className="h-100 flex flex-col items-center justify-center gap-4">
+                            <h2 className="font-semibold text-xl">No players selected yet</h2>
+                            <p>Go to Available tab to select players</p>
                         </div>
-                    ))
+                        : selectedPlayers.map(player => (
+                            <SelectedCard key={player.playerName} player={player} handleRemoveSelectedPlayer={handleRemoveSelectedPlayer} />
+                        ))
                 }
             </div>
         </div>
